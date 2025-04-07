@@ -130,3 +130,14 @@ footer {
   padding: 10px 0;
   margin-top: 20px;
 }
+
+
+    /* Style for highlighted words */
+    .highlight {
+      font-weight: bold;
+      color: #c00; /* You can change the color as needed */
+    }
+    .topics ul {
+      list-style-type: disc;
+      margin-left: 40px;
+    }
