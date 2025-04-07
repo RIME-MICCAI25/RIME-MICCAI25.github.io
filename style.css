@@ -59,6 +59,7 @@ nav .logo a {
 
 .logo-container {
   margin-bottom: 10px;
+  display: flex;
 }
 
 .logo {
