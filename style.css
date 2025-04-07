@@ -141,3 +141,33 @@ footer {
       list-style-type: disc;
       margin-left: 40px;
     }
+
+/* style for persons */
+.person {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .person img {
+      width: 150px;
+      height: auto;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h2 {
+      margin: 0 0 10px;
+      font-size: 1.5em;
+      color: #333;
+    }
+    .info p {
+      margin: 0;
+      color: #555;
+    }
