@@ -135,7 +135,7 @@ footer {
     /* Style for highlighted words */
     .highlight {
       font-weight: bold;
-      color: #c00; /* You can change the color as needed */
+      color: #333; /* You can change the color as needed */
     }
     .topics ul {
       list-style-type: disc;
