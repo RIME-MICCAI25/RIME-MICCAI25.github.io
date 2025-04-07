@@ -49,35 +49,6 @@ nav .logo a {
   font-size: 16px;
 }
 
-/* Hero Section */
-.hero {
-  background: url('hero.jpg') no-repeat center center/cover;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
-}
-
-.hero-content h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.hero-content p {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #e8491d;
-  color: #fff;
-  padding: 10px 20px;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 5px;
-}
 
 /* Header Styles */
 .main-header {
@@ -114,7 +85,7 @@ nav .logo a {
 .content {
   padding: 40px 0;
   background: #f4f4f4;
-  text-align: center;
+  text-align: left;
 }
 
 /* About & Contact Sections */
@@ -147,7 +118,7 @@ footer {
       display: flex;
       align-items: center;
       background: #fff;
-      padding: 15px;
+      padding: 40px;
       margin-bottom: 15px;
       max-width: 500px; /* Reduced max-width for a smaller box */
       width: 80%;
