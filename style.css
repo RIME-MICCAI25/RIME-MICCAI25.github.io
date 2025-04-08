@@ -104,6 +104,10 @@ nav .logo a {
   padding: 40px 0;
 }
 
+*:not(h1) + h1 {
+  margin-top: 10px;
+}
+
 /* Footer */
 footer {
   background: #333;
