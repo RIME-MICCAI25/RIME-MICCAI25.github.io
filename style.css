@@ -50,7 +50,7 @@ nav .logo a {
 }
 
 
-/* Header Styles */
+/* Main Styles */
 .main-header {
   background: #f4f4f4; /* Light background, change as needed */
   padding: 20px;
@@ -143,8 +143,8 @@ th, td {
       padding: 40px;
       margin-bottom: 10px;
       margin-left: 40px;
-      max-width: 1000px; /* Reduced max-width for a smaller box */
       width: 80%;
+      justify-content: center;
     }
     .person img {
       width: 150px;
