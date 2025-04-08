@@ -129,6 +129,12 @@ footer {
       margin-left: 40px;
     }
 
+/* table */
+th, td {
+  border: 2px solid black; /* Change 2px to your desired thickness */
+  padding: 20px;
+}
+
 /* style for persons */
 .person {
       display: flex;
