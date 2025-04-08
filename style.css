@@ -60,7 +60,8 @@ nav .logo a {
 .logo-container {
   margin-bottom: 10px;
   display: flex;
-  vertical-align: middle;
+  justify-content: center; /* Centers logos horizontally */
+  align-items: center;     /* Vertically aligns them if needed */
 }
 
 .logo {
