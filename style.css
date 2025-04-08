@@ -28,11 +28,20 @@ nav {
 }
 
 nav .logo a {
+  display: flex;
+  align-items: center;
   color: #fff;
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
 }
+
+nav .logo-img {
+  height: 40px; /* adjust to fit your design */
+  margin-right: 10px;
+}
+
+
 
 .nav-links {
   list-style: none;
