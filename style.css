@@ -174,3 +174,32 @@ th, td {
       margin: 0;
       color: #555;
     }
+
+.speaker {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 40px;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      width: 80%;
+      justify-content: center;
+    }
+    .person img {
+      width: 150px;
+      height: auto;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h2 {
+      margin: 0 0 10px;
+      font-size: 1.5em;
+      color: #333;
+    }
+    .info p {
+      margin: 0;
+      color: #555;
+    }
