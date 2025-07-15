@@ -145,32 +145,32 @@ footer {
   padding: 20px;
 }  */
 
-    table {
+table {
       width: 100%;
       border-collapse: collapse;
-      table-layout: fixed;
     }
     th, td {
       border: 1px solid #ccc;
-      padding: 8px;
+      padding: 10px;
       vertical-align: top;
     }
     th {
       background-color: #f2f2f2;
     }
-    tr.time-slot {
-      background-color: #e6f7ff;
-      font-weight: bold;
-    }
-    td.time {
+    .time-col {
       width: 12%;
       white-space: nowrap;
     }
-    td.speaker {
+    .speaker-col {
       width: 25%;
     }
-    td.title {
+    .title-col {
       width: 63%;
+    }
+    .slot {
+      background-color: #e6f7ff;
+      font-weight: bold;
+      text-align: center;
     }
 
 /* style for persons */
