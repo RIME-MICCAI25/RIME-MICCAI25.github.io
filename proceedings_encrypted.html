@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Proceedings – Protected</title>
+<style>
+  body { font-family: system-ui, Arial, sans-serif; line-height: 1.6; margin: 0; background:#f8fafc; }
+  .wrap { max-width: 720px; margin: 4rem auto; background:#fff; padding: 2rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+  h1 { margin: 0 0 1rem 0; font-size: 1.5rem; }
+  .ribbon { border-left: 4px solid #0073e6; padding-left: 1em; margin: 1rem 0 1.5rem; }
+  form { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; margin: 1rem 0 0; }
+  input[type="password"] { padding: .65rem .8rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; }
+  button { padding: .65rem 1rem; border: 0; border-radius: 8px; background:#0073e6; color:#fff; font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .6; cursor: default; }
+  .msg { color:#b91c1c; margin-top: .5rem; min-height: 1.2em; }
+  .hidden { display: none; }
+  .links a { display:block; color:#0073e6; text-decoration:none; font-weight:600; margin:.5rem 0; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Proceedings (Password Protected)</h1>
+
+    <div class="ribbon" aria-live="polite">
+      <p><strong>Attention:</strong> Access requires a password.</p>
+    </div>
+
+    <!-- Password form -->
+    <form id="gate" autocomplete="off">
+      <input id="pw" type="password" inputmode="text" placeholder="Enter password" aria-label="Password" required />
+      <button id="submitBtn" type="submit">Unlock</button>
+      <div class="msg" id="msg" aria-live="polite"></div>
+    </form>
+
+    <!-- Hidden content revealed on success -->
+    <div id="protected" class="hidden">
+      <h2 style="margin-top:1.5rem">Reconstruction and Imaging Motion Estimation, and Graphs in Biomedical Image Analysis</h2>
+      <div class="links" style="margin-top:.75rem">
+        <!-- Option A: reveal download/view links -->
+        <a href="/files/proceedings/RIME-GRAIL-2025-Proceedings.pdf" rel="noopener">Download PDF</a>
+        <a href="https://link.springer.com/book/9783032061034" rel="noopener">Springer Website</a>
+        <!-- Option B: auto-redirect instead (uncomment to enable) -->
+        <!-- <script>window.location.href="/files/proceedings/RIME-GRAIL-2025-Proceedings.pdf";</script> -->
+      </div>
+      <p style="margin-top:1rem;color:#374151">
+        Please do not share the password publicly.
+      </p>
+    </div>
+  </div>
+
+<script>
+/**
+ * Set your SHA-256 hash of the password here (hex string, lowercase).
+ * How to generate in your browser console:
+ *   const enc = new TextEncoder();
+ *   crypto.subtle.digest('SHA-256', enc.encode('YOUR_PASSWORD'))
+ *     .then(buf => console.log([...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('')));
+ */
+const PASSWORD_HASH_HEX = "replace_with_your_sha256_hash"; // e.g., "5e884898da28047151d0e56f8dc62927..." (this is NOT a real example)
+
+const pwEl = document.getElementById('pw');
+const form = document.getElementById('gate');
+const msg = document.getElementById('msg');
+const submitBtn = document.getElementById('submitBtn');
+const protectedEl = document.getElementById('protected');
+
+async function sha256Hex(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.textContent = "";
+  submitBtn.disabled = true;
+  try {
+    const entered = pwEl.value || "";
+    const enteredHash = await sha256Hex(entered);
+    if (enteredHash === PASSWORD_HASH_HEX) {
+      // success: show protected content
+      protectedEl.classList.remove('hidden');
+      form.classList.add('hidden');
+      msg.textContent = "";
+      // Optional: clear the password from memory/UI
+      pwEl.value = "";
+    } else {
+      msg.textContent = "Incorrect password. Please try again.";
+    }
+  } catch (err) {
+    console.error(err);
+    msg.textContent = "An error occurred. Please try again.";
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
