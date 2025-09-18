@@ -22,10 +22,6 @@
   <div class="wrap">
     <h1>Proceedings (Password Protected)</h1>
 
-    <div class="ribbon" aria-live="polite">
-      <p><strong>Attention:</strong> Access requires a password.</p>
-    </div>
-
     <!-- Password form -->
     <form id="gate" autocomplete="off">
       <input id="pw" type="password" inputmode="text" placeholder="Enter password" aria-label="Password" required />
@@ -58,7 +54,7 @@
  *     .then(buf => console.log([...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('')));
  */
   // pw : rime@MICCAI2025
-const PASSWORD_HASH_HEX = "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea"; //"883fba46ed98f740e242cb55eb3a6eedbfec0f46e44fece17e2480ce9c4e9991"; // e.g., "5e884898da28047151d0e56f8dc62927..." (this is NOT a real example)
+const PASSWORD_HASH_HEX = "883fba46ed98f740e242cb55eb3a6eedbfec0f46e44fece17e2480ce9c4e9991"; //demo"2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea";  // e.g., "5e884898da28047151d0e56f8dc62927..." (this is NOT a real example)
 
 const pwEl = document.getElementById('pw');
 const form = document.getElementById('gate');
@@ -76,15 +72,19 @@ form.addEventListener('submit', async (e) => {
   msg.textContent = "";
   submitBtn.disabled = true;
   try {
-    const entered = pwEl.value || "";
-    const enteredHash = await sha256Hex(entered);
-    if (enteredHash === PASSWORD_HASH_HEX) {
-      // success: show protected content
+    // NEW: trim and normalize to avoid accidental whitespace/Unicode issues
+    const entered = (pwEl.value || "").trim().normalize('NFC');
+    const enteredHash = (await sha256Hex(entered)).toLowerCase();
+    const targetHash = (PASSWORD_HASH_HEX || "").trim().toLowerCase();
+
+    // DEBUG (optional): uncomment the next line once to compare values in Console
+    console.log({enteredHash, targetHash});
+
+    if (enteredHash === targetHash && targetHash.length === 64) {
       protectedEl.classList.remove('hidden');
       form.classList.add('hidden');
-      msg.textContent = "";
-      // Optional: clear the password from memory/UI
       pwEl.value = "";
+      msg.textContent = "";
     } else {
       msg.textContent = "Incorrect password. Please try again.";
     }
