@@ -6,6 +6,48 @@
   <title>RIME 2025 - Submission</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
+<!-- Lightbox container -->
+<div class="lightbox" id="lightbox" aria-hidden="true" aria-label="Image lightbox">
+  <button class="close" id="lightbox-close" aria-label="Close">✕</button>
+  <img id="lightbox-img" alt="" />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+    const links = document.querySelectorAll('[data-lightbox]');
+
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        // If you have a larger image, put its URL in href. Otherwise fallback to the thumbnail src.
+        const thumb = link.querySelector('img');
+        const href = link.getAttribute('href');
+        const src = (href && href !== '#') ? href : (thumb ? thumb.src : null);
+        if (!src) return;
+
+        lbImg.src = src;
+        lbImg.alt = thumb ? thumb.alt || 'Workshop image' : 'Workshop image';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeLB() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lbImg.src = '';
+      lbImg.alt = '';
+    }
+    lbClose.addEventListener('click', closeLB);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLB(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLB(); });
+  });
+</script>
+
 <body>
   <header>
     <nav>
